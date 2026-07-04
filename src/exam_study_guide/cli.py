@@ -230,7 +230,7 @@ def full(
     review_points_path = output_dir / "review_points.docx"
 
     console.print("[bold]Step 1/4:[/] Extracting question banks...")
-    extract(input_dir, extracted_dir)
+    extract(input_dir, extracted_dir, formats=[".docx", ".doc", ".pdf", ".txt"])
 
     console.print("\n[bold]Step 2/4:[/] Matching questions to outline...")
     match(config, extracted_dir, review_file, threshold, manual_file)
