@@ -1,0 +1,57 @@
+name: exam-study-guide
+version: 1.0.0
+description: |
+  Generate exam study guides from an outline and question banks.
+  Extracts questions from docx/doc/pdf/txt, matches them to outline points
+  using keyword scoring with IDF weighting, supports human review of matches,
+  and generates Word documents with study guidance, questions, answers, and explanations.
+author: "Claude Code User"
+license: MIT
+
+commands:
+  - name: full
+    description: "Run full pipeline: extract → match → generate study guide and review points"
+    usage: "/study-guide full --config <yaml> --input-dir <dir> --output-dir <dir>"
+    script: "python -m exam_study_guide.cli full"
+
+  - name: extract
+    description: "Extract text from question bank files (docx/doc/pdf/txt)"
+    usage: "/study-guide extract <input-dir> <output-dir>"
+    script: "python -m exam_study_guide.cli extract"
+
+  - name: match
+    description: "Match questions to outline points and produce a review file"
+    usage: "/study-guide match --config <yaml> --questions-dir <dir> --review-file <json>"
+    script: "python -m exam_study_guide.cli match"
+
+  - name: review
+    description: "Interactively review and correct auto-matched questions"
+    usage: "/study-guide review --review-file <json>"
+    script: "python -m exam_study_guide.cli review"
+
+  - name: generate
+    description: "Generate final study guide Word document from a reviewed match file"
+    usage: "/study-guide generate --config <yaml> --review-file <json> --output <docx>"
+    script: "python -m exam_study_guide.cli generate"
+
+  - name: generate-review
+    description: "Generate a review-points Word document with study guidance and examples"
+    usage: "/study-guide generate-review --config <yaml> --output <docx>"
+    script: "python -m exam_study_guide.cli generate-review"
+
+requirements:
+  python: ">=3.10"
+  system:
+    - pandoc (for .docx extraction)
+    - Optional for .doc on Linux/macOS: antiword or catdoc
+    - Optional for .doc on Windows: Microsoft Word + pywin32
+
+install: |
+  pip install -e .
+  # macOS:
+  #   brew install pandoc antiword
+  # Ubuntu/Debian:
+  #   sudo apt-get install pandoc antiword catdoc
+  # Windows:
+  #   choco install pandoc
+  #   pip install -e ".[windows]"

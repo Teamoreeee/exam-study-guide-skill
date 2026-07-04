@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Temporary extraction outputs
+extracted/
+output/
+*.docx
+*.pdf
+*.doc
+
+# Review files (user-generated)
+match_review.json
+manual_assignments.yaml
+
+# Local Claude Code settings
+.claude/
